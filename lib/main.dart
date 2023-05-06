@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riverpod_rivaan/features/screens/login_screen.dart';
 import 'package:riverpod_rivaan/theme/pallete.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Reddit Tutorial',
       theme: Pallete.darkModeAppTheme,
-      home: SizedBox(),
+      home: LoginScreen(),
     );
   }
 }
