@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "133955980947",
+    "project_id": "fb-auth-provider2",
+    "storage_bucket": "fb-auth-provider2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:133955980947:android:046e639b3813404ebcc766",
+        "android_client_info": {
+          "package_name": "com.example.provider_cho_udemy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "133955980947-a8cemjbnpqgic1r94mcdabh1ilih3j6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEr_YF8UDPdBM11qgQOVVT2zO1dO-mO0c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "133955980947-a8cemjbnpqgic1r94mcdabh1ilih3j6n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "133955980947-2nt9h84uvo2quc3c6nou30ss7lkdl5k1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.riverpodRivaan"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:133955980947:android:86e865ba03bbafe9bcc766",
+        "android_client_info": {
+          "package_name": "com.example.riverpod_rivaan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "133955980947-ocua8gckhuuvqstfimbprss19sl63lv3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.riverpod_rivaan",
+            "certificate_hash": "420138f16421ff389e8411792c29ff4189c3e8d4"
+          }
+        },
+        {
+          "client_id": "133955980947-a8cemjbnpqgic1r94mcdabh1ilih3j6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEr_YF8UDPdBM11qgQOVVT2zO1dO-mO0c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "133955980947-a8cemjbnpqgic1r94mcdabh1ilih3j6n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "133955980947-2nt9h84uvo2quc3c6nou30ss7lkdl5k1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.riverpodRivaan"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
