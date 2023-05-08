@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:riverpod_rivaan/core/constants/common/sign_in_button.dart';
+import 'package:riverpod_rivaan/core/common/sign_in_button.dart';
 import 'package:riverpod_rivaan/core/constants/constants.dart';
 
 class LoginScreen extends StatelessWidget {
