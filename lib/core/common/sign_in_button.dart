@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_rivaan/core/constants/constants.dart';
-import 'package:riverpod_rivaan/features/controller/auth_controller.dart';
+import 'package:riverpod_rivaan/features/auth/controller/auth_controller.dart';
 import 'package:riverpod_rivaan/theme/pallete.dart';
 
 class SignInButton extends ConsumerWidget {
   const SignInButton({super.key});
 
   void signInwithGoogle(BuildContext context, WidgetRef ref) {
-    ref.read(authControllerProvider).signInWithGoogle(context);
+    ref.read(authControllerProvider.notifier).signInWithGoogle(context);
   }
 
   @override
