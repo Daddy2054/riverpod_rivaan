@@ -4,11 +4,16 @@ import 'package:riverpod_rivaan/core/common/error_text.dart';
 import 'package:riverpod_rivaan/core/common/loader.dart';
 import 'package:riverpod_rivaan/features/auth/controller/auth_controller.dart';
 import 'package:riverpod_rivaan/features/community/controller/community_controller.dart';
+import 'package:routemaster/routemaster.dart';
 
 class CommunityScreen extends ConsumerWidget {
   final String name;
 
   const CommunityScreen({super.key, required this.name});
+
+  void navigateToModTools(BuildContext context) {
+    Routemaster.of(context).push('/mod-tools/$name');
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -60,7 +65,9 @@ class CommunityScreen extends ConsumerWidget {
                               ),
                               community.mods.contains(user.uid)
                                   ? OutlinedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        navigateToModTools(context);
+                                      },
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
