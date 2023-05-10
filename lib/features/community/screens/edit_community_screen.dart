@@ -8,6 +8,7 @@ import 'package:riverpod_rivaan/core/common/loader.dart';
 import 'package:riverpod_rivaan/core/constants/constants.dart';
 import 'package:riverpod_rivaan/core/utils.dart';
 import 'package:riverpod_rivaan/features/community/controller/community_controller.dart';
+import 'package:riverpod_rivaan/models/community_model.dart';
 import 'package:riverpod_rivaan/theme/pallete.dart';
 
 class EditCommunityScreen extends ConsumerStatefulWidget {
@@ -35,6 +36,15 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
     }
   }
 
+  void save(Community community) {
+    ref.read(communityControllerProvider.notifier).editCommunity(
+          profileFile: profileFile,
+          bannerFile: bannerFile,
+          context: context,
+          community: community,
+        );
+  }
+
   void selectProfileImage() async {
     final res = await pickImage();
     if (res != null) {
@@ -46,6 +56,7 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(communityControllerProvider);
     return ref.watch(getCommunityByNameProvider(widget.name)).when(
           data: (community) => Scaffold(
             backgroundColor: Pallete.darkModeAppTheme.colorScheme.background,
@@ -53,12 +64,12 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
               title: Text('Edit Community'),
               actions: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => save(community),
                   child: const Text('Save'),
                 ),
               ],
             ),
-            body: Padding(
+            body: isLoading ? const Loader() : Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
