@@ -50,7 +50,7 @@ class CommunityRepository {
     }
   }
 
-FutureVoid leaveCommunity(String communityName, String userId) async {
+  FutureVoid leaveCommunity(String communityName, String userId) async {
     try {
       return right(
         _communities.doc(communityName).update({
@@ -67,7 +67,6 @@ FutureVoid leaveCommunity(String communityName, String userId) async {
       );
     }
   }
-
 
   Stream<List<Community>> getUserCommunities(String uid) {
     return _communities.where('members', arrayContains: uid).snapshots().map(
@@ -128,6 +127,26 @@ FutureVoid leaveCommunity(String communityName, String userId) async {
       }
       return communities;
     });
+  }
+
+  FutureVoid addMods(String communityName, List<String> uids) async {
+    try {
+      return right(
+        _communities.doc(communityName).update(
+          {
+            'mods': uids,
+          },
+        ),
+      );
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(
+        Failure(
+          e.toString(),
+        ),
+      );
+    }
   }
 
   CollectionReference get _communities =>
