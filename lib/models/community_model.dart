@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
 class Community {
@@ -58,9 +56,9 @@ class Community {
     );
   }
 
-  String toJson() => json.encode(toMap());
+  // String toJson() => json.encode(toMap());
 
-  factory Community.fromJson(String source) => Community.fromMap(json.decode(source));
+  // factory Community.fromJson(String source) => Community.fromMap(json.decode(source));
 
   @override
   String toString() {

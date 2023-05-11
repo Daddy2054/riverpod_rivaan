@@ -61,7 +61,7 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
           data: (community) => Scaffold(
             backgroundColor: Pallete.darkModeAppTheme.colorScheme.background,
             appBar: AppBar(
-              title: Text('Edit Community'),
+              title: const Text('Edit Community'),
               actions: [
                 TextButton(
                   onPressed: () => save(community),
@@ -131,7 +131,7 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
               ),
             ),
           ),
-          error: (error, StackTrace) => ErrorText(
+          error: (error, stackTrace) => ErrorText(
             error: error.toString(),
           ),
           loading: () => const Loader(),

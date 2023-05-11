@@ -110,7 +110,7 @@ class CommunityScreen extends ConsumerWidget {
             ),
             error: (
               error,
-              StackTrace,
+              stackTrace,
             ) =>
                 ErrorText(
               error: error.toString(),

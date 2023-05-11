@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_rivaan/core/common/error_text.dart';
 import 'package:riverpod_rivaan/core/common/loader.dart';
 import 'package:riverpod_rivaan/features/auth/controller/auth_controller.dart';
-import 'package:riverpod_rivaan/features/auth/screens/login_screen.dart';
 import 'package:riverpod_rivaan/firebase_options.dart';
 import 'package:riverpod_rivaan/models/user_model.dart';
 import 'package:riverpod_rivaan/router.dart';

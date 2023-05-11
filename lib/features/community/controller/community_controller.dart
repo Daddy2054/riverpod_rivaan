@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_rivaan/core/constants/constants.dart';
 import 'package:riverpod_rivaan/core/providers/storage_repository_provider.dart';
-import 'package:riverpod_rivaan/core/type_defs.dart';
 import 'package:riverpod_rivaan/core/utils.dart';
 import 'package:riverpod_rivaan/features/auth/controller/auth_controller.dart';
 import 'package:riverpod_rivaan/features/community/repository/community_repository.dart';
@@ -31,6 +30,12 @@ final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
   return ref
       .watch(communityControllerProvider.notifier)
       .getCommunityByName(name);
+});
+
+final searchCommunityProvider = StreamProvider.family((ref, String query) {
+  return ref
+      .watch(communityControllerProvider.notifier)
+      .searchCommunity(query);
 });
 
 class CommunityController extends StateNotifier<bool> {
@@ -120,5 +125,9 @@ class CommunityController extends StateNotifier<bool> {
       (l) => showSnackBar(context, l.message),
       (r) => Routemaster.of(context).pop(),
     );
+  }
+
+  Stream<List<Community>> searchCommunity(String query) {
+    return _communityRepository.searchCommunity(query);
   }
 }
