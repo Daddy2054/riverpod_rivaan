@@ -36,14 +36,7 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
     }
   }
 
-  void save(Community community) {
-    ref.read(communityControllerProvider.notifier).editCommunity(
-          profileFile: profileFile,
-          bannerFile: bannerFile,
-          context: context,
-          community: community,
-        );
-  }
+
 
   void selectProfileImage() async {
     final res = await pickImage();
@@ -54,6 +47,14 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
     }
   }
 
+  void save(Community community) {
+    ref.read(communityControllerProvider.notifier).editCommunity(
+          profileFile: profileFile,
+          bannerFile: bannerFile,
+          context: context,
+          community: community,
+        );
+  }
   @override
   Widget build(BuildContext context) {
     final isLoading = ref.watch(communityControllerProvider);
