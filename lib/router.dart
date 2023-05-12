@@ -9,6 +9,7 @@ import 'package:riverpod_rivaan/features/community/screens/create_community_scre
 import 'package:riverpod_rivaan/features/community/screens/edit_community_screen.dart';
 import 'package:riverpod_rivaan/features/community/screens/mod_tools_screen.dart';
 import 'package:riverpod_rivaan/features/home/screens/home_screen.dart';
+import 'package:riverpod_rivaan/features/user_profile/screens/user_profile_screen.dart';
 import 'package:routemaster/routemaster.dart';
 
 final loggedOutRoute = RouteMap(routes: {
@@ -39,9 +40,14 @@ final loggedInRoute = RouteMap(routes: {
           name: routeData.pathParameters['name']!,
         ),
       ),
-      '/add-mods/:name': (routeData) => MaterialPage(
+  '/add-mods/:name': (routeData) => MaterialPage(
         child: AddModsScreen(
           name: routeData.pathParameters['name']!,
+        ),
+      ),
+  '/u/:uid': (routeData) => MaterialPage(
+        child: UserProfileScreen(
+          uid: routeData.pathParameters['uid']!,
         ),
       ),
 });
