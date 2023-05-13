@@ -9,6 +9,7 @@ import 'package:riverpod_rivaan/features/community/screens/create_community_scre
 import 'package:riverpod_rivaan/features/community/screens/edit_community_screen.dart';
 import 'package:riverpod_rivaan/features/community/screens/mod_tools_screen.dart';
 import 'package:riverpod_rivaan/features/home/screens/home_screen.dart';
+import 'package:riverpod_rivaan/features/post/screens/add_post_type.screen.dart';
 import 'package:riverpod_rivaan/features/user_profile/screens/edit_profile_screen.dart';
 import 'package:riverpod_rivaan/features/user_profile/screens/user_profile_screen.dart';
 import 'package:routemaster/routemaster.dart';
@@ -51,10 +52,14 @@ final loggedInRoute = RouteMap(routes: {
           uid: routeData.pathParameters['uid']!,
         ),
       ),
-        '/edit-profile/:uid': (routeData) => MaterialPage(
+  '/edit-profile/:uid': (routeData) => MaterialPage(
         child: EditProfileScreen(
           uid: routeData.pathParameters['uid']!,
         ),
       ),
-
+  '/add-post/:type': (routeData) => MaterialPage(
+        child: AddPostTypeScreen(
+          type: routeData.pathParameters['type']!,
+        ),
+      ),
 });
