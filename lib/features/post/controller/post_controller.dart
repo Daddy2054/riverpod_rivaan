@@ -22,6 +22,12 @@ final postControllerProvider =
   );
 });
 
+final userPostsProvider =
+    StreamProvider.family((ref, List<Community> communities) {
+  final postController = ref.watch(postControllerProvider.notifier);
+  return postController.fetchUserPosts(communities);
+});
+
 class PostController extends StateNotifier<bool> {
   final PostRepository _postRepository;
   final Ref _ref;
@@ -43,7 +49,7 @@ class PostController extends StateNotifier<bool> {
     required String description,
   }) async {
     state = true;
-    String postId = Uuid().v1();
+    String postId = const Uuid().v1();
     final user = _ref.read(userProvider)!;
 
     final Post post = Post(
@@ -51,14 +57,14 @@ class PostController extends StateNotifier<bool> {
       title: title,
       communityName: selectedCommunity.name,
       communityProfilePic: selectedCommunity.avatar,
-      upvotes: [],
-      downvotes: [],
+      upvotes: const [],
+      downvotes: const [],
       commentCount: 0,
       username: user.name,
       uid: user.uid,
       type: 'text',
       createdAt: DateTime.now(),
-      awards: [],
+      awards: const [],
       description: description,
     );
     final res = await _postRepository.addPost(post);
@@ -79,7 +85,7 @@ class PostController extends StateNotifier<bool> {
     required String link,
   }) async {
     state = true;
-    String postId = Uuid().v1();
+    String postId = const Uuid().v1();
     final user = _ref.read(userProvider)!;
 
     final Post post = Post(
@@ -87,14 +93,14 @@ class PostController extends StateNotifier<bool> {
       title: title,
       communityName: selectedCommunity.name,
       communityProfilePic: selectedCommunity.avatar,
-      upvotes: [],
-      downvotes: [],
+      upvotes: const [],
+      downvotes: const [],
       commentCount: 0,
       username: user.name,
       uid: user.uid,
       type: 'link',
       createdAt: DateTime.now(),
-      awards: [],
+      awards: const [],
       link: link,
     );
     final res = await _postRepository.addPost(post);
@@ -115,7 +121,7 @@ class PostController extends StateNotifier<bool> {
     required File? file,
   }) async {
     state = true;
-    String postId = Uuid().v1();
+    String postId = const Uuid().v1();
     final user = _ref.read(userProvider)!;
     final imageRes = await _storageRepository.storeFile(
       path: 'posts/${selectedCommunity.name}',
@@ -131,14 +137,14 @@ class PostController extends StateNotifier<bool> {
           title: title,
           communityName: selectedCommunity.name,
           communityProfilePic: selectedCommunity.avatar,
-          upvotes: [],
-          downvotes: [],
+          upvotes: const [],
+          downvotes: const [],
           commentCount: 0,
           username: user.name,
           uid: user.uid,
           type: 'image',
           createdAt: DateTime.now(),
-          awards: [],
+          awards: const [],
           link: r,
         );
         final res = await _postRepository.addPost(post);
@@ -152,5 +158,12 @@ class PostController extends StateNotifier<bool> {
         );
       },
     );
+  }
+
+  Stream<List<Post>> fetchUserPosts(List<Community> communities) {
+    if (communities.isNotEmpty) {
+      return _postRepository.fetchUserPosts(communities);
+    }
+    return Stream.value([]);
   }
 }
