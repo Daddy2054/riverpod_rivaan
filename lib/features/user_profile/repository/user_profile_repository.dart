@@ -5,6 +5,7 @@ import 'package:riverpod_rivaan/core/constants/firebase_constants.dart';
 import 'package:riverpod_rivaan/core/failure.dart';
 import 'package:riverpod_rivaan/core/providers/firebase_providers.dart';
 import 'package:riverpod_rivaan/core/type_defs.dart';
+import 'package:riverpod_rivaan/models/post_model.dart';
 import 'package:riverpod_rivaan/models/user_model.dart';
 
 final userProfileRepositoryProvider = Provider((ref) {
@@ -20,6 +21,8 @@ class UserProfileRepository {
 
   CollectionReference get _users =>
       _firestore.collection(FirebaseConstants.usersCollection);
+  CollectionReference get _posts =>
+      _firestore.collection(FirebaseConstants.postsCollection);
 
   FutureVoid editProfile(UserModel user) async {
     try {
@@ -37,5 +40,27 @@ class UserProfileRepository {
         ),
       );
     }
+  }
+
+  Stream<List<Post>> getUserPosts(String uid) {
+    return _posts
+        .where(
+          'uid',
+          isEqualTo: uid,
+        )
+        .orderBy(
+          'createdAt',
+          descending: true,
+        )
+        .snapshots()
+        .map(
+          (event) => event.docs
+              .map(
+                (e) => Post.fromMap(
+                  e.data() as Map<String, dynamic>,
+                ),
+              )
+              .toList(),
+        );
   }
 }

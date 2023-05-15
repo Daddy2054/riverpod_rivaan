@@ -10,6 +10,7 @@ import 'package:riverpod_rivaan/core/utils.dart';
 import 'package:riverpod_rivaan/features/auth/controller/auth_controller.dart';
 import 'package:riverpod_rivaan/features/community/repository/community_repository.dart';
 import 'package:riverpod_rivaan/models/community_model.dart';
+import 'package:riverpod_rivaan/models/post_model.dart';
 import 'package:routemaster/routemaster.dart';
 
 final userCommunitiesProvider = StreamProvider((ref) {
@@ -36,6 +37,10 @@ final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
 
 final searchCommunityProvider = StreamProvider.family((ref, String query) {
   return ref.watch(communityControllerProvider.notifier).searchCommunity(query);
+});
+
+final getCommunityPostsProvider = StreamProvider.family((ref, String name) {
+  return  ref.read(communityControllerProvider.notifier).getCommunityPosts(name);
 });
 
 class CommunityController extends StateNotifier<bool> {
@@ -157,4 +162,10 @@ class CommunityController extends StateNotifier<bool> {
       (r) => Routemaster.of(context).pop(),
     );
   }
+
+
+  Stream<List<Post>> getCommunityPosts(String name) {
+    return _communityRepository.getCommunityPosts(name);
+  }
+  
 }

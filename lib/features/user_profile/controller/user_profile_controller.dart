@@ -6,6 +6,7 @@ import 'package:riverpod_rivaan/core/providers/storage_repository_provider.dart'
 import 'package:riverpod_rivaan/core/utils.dart';
 import 'package:riverpod_rivaan/features/auth/controller/auth_controller.dart';
 import 'package:riverpod_rivaan/features/user_profile/repository/user_profile_repository.dart';
+import 'package:riverpod_rivaan/models/post_model.dart';
 import 'package:riverpod_rivaan/models/user_model.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -20,6 +21,9 @@ final userProfileControllerProvider =
   );
 });
 
+final getUserPostsProvider = StreamProvider.family((ref, String uid) {
+  return  ref.read(userProfileControllerProvider.notifier).getUserPosts(uid);
+});
 class UserProfileController extends StateNotifier<bool> {
   final UserProfileRepository _userProfileRepository;
   final Ref _ref;
@@ -75,5 +79,9 @@ class UserProfileController extends StateNotifier<bool> {
       _ref.read(userProvider.notifier).update((state) => user);
       Routemaster.of(context).pop();
     });
+  }
+
+  Stream<List<Post>> getUserPosts(String uid) {
+    return _userProfileRepository.getUserPosts(uid);
   }
 }

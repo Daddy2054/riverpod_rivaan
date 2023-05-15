@@ -6,6 +6,7 @@ import 'package:riverpod_rivaan/core/failure.dart';
 import 'package:riverpod_rivaan/core/providers/firebase_providers.dart';
 import 'package:riverpod_rivaan/core/type_defs.dart';
 import 'package:riverpod_rivaan/models/community_model.dart';
+import 'package:riverpod_rivaan/models/post_model.dart';
 
 final communityRepositoryProvider = Provider((ref) {
   return CommunityRepository(
@@ -149,6 +150,30 @@ class CommunityRepository {
     }
   }
 
+  Stream<List<Post>> getCommunityPosts(String name) {
+    return _posts
+        .where(
+          'communityName',
+          isEqualTo: name,
+        )
+        .orderBy(
+          'createdAt',
+          descending: true,
+        )
+        .snapshots()
+        .map(
+          (event) => event.docs
+              .map(
+                (e) => Post.fromMap(
+                  e.data() as Map<String, dynamic>,
+                ),
+              )
+              .toList(),
+        );
+  }
+
+  CollectionReference get _posts =>
+      _firestore.collection(FirebaseConstants.postsCollection);
   CollectionReference get _communities =>
       _firestore.collection(FirebaseConstants.communitiesCollection);
 }
