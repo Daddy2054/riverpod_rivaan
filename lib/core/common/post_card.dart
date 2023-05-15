@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_rivaan/core/constants/constants.dart';
 import 'package:riverpod_rivaan/features/auth/controller/auth_controller.dart';
+import 'package:riverpod_rivaan/features/post/controller/post_controller.dart';
 import 'package:riverpod_rivaan/models/post_model.dart';
 import 'package:riverpod_rivaan/theme/pallete.dart';
 import 'package:any_link_preview/any_link_preview.dart';
@@ -9,6 +10,10 @@ import 'package:any_link_preview/any_link_preview.dart';
 class PostCard extends ConsumerWidget {
   final Post post;
   const PostCard({required this.post, super.key});
+
+  void deletePost(WidgetRef ref, BuildContext context) async {
+    ref.read(postControllerProvider.notifier).deletePost(post, context);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -74,7 +79,7 @@ class PostCard extends ConsumerWidget {
                               ),
                               if (post.uid == user.uid)
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () => deletePost(ref,context),
                                   icon: Icon(
                                     Icons.delete,
                                     color: Pallete.redColor,
@@ -100,9 +105,8 @@ class PostCard extends ConsumerWidget {
                               ),
                             ),
                           if (isTypeLink)
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.35,
-                              width: double.infinity,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 18),
                               child: AnyLinkPreview(
                                 displayDirection:
                                     UIDirection.uiDirectionHorizontal,
@@ -149,24 +153,23 @@ class PostCard extends ConsumerWidget {
                                           : null,
                                     ),
                                   ),
-
-
                                 ],
                               ),
-                               Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: (){},// => navigateToComments(context),
-                                      icon: const Icon(
-                                        Icons.comment,
-                                      ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    onPressed:
+                                        () {}, // => navigateToComments(context),
+                                    icon: const Icon(
+                                      Icons.comment,
                                     ),
-                                    Text(
-                                      '${post.commentCount == 0 ? 'Comment' : post.commentCount}',
-                                      style: const TextStyle(fontSize: 17),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  Text(
+                                    '${post.commentCount == 0 ? 'Comment' : post.commentCount}',
+                                    style: const TextStyle(fontSize: 17),
+                                  ),
+                                ],
+                              ),
                             ],
                           )
                         ],
