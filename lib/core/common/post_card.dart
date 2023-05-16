@@ -31,9 +31,12 @@ class PostCard extends ConsumerWidget {
     Routemaster.of(context).push('/u/${post.uid}');
   }
 
-
   void navigateToCommunity(BuildContext context) {
     Routemaster.of(context).push('/r/${post.communityName}');
+  }
+
+  void navigateToComments(BuildContext context) {
+    Routemaster.of(context).push('/post/${post.id}/comments');
   }
 
   @override
@@ -70,7 +73,7 @@ class PostCard extends ConsumerWidget {
                               Row(
                                 children: [
                                   GestureDetector(
-                                    onTap: () =>navigateToCommunity(context),
+                                    onTap: () => navigateToCommunity(context),
                                     child: CircleAvatar(
                                       backgroundImage: NetworkImage(
                                         post.communityProfilePic,
@@ -187,8 +190,8 @@ class PostCard extends ConsumerWidget {
                               Row(
                                 children: [
                                   IconButton(
-                                    onPressed:
-                                        () {}, // => navigateToComments(context),
+                                    onPressed: () =>
+                                        navigateToComments(context),
                                     icon: const Icon(
                                       Icons.comment,
                                     ),
@@ -221,7 +224,7 @@ class PostCard extends ConsumerWidget {
                                     loading: () => const Loader(),
                                   ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -230,7 +233,10 @@ class PostCard extends ConsumerWidget {
               ),
             ],
           ),
-        )
+        ),
+        const SizedBox(
+          height: 10,
+        ),
       ],
     );
   }
