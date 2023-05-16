@@ -223,6 +223,9 @@ class PostCard extends ConsumerWidget {
                                     ),
                                     loading: () => const Loader(),
                                   ),
+
+
+                                  
                             ],
                           ),
                         ],
